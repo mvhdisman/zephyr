@@ -21,80 +21,6 @@ static evtchn_handle_t event_channels[EVTCHN_2L_NR_CHANNELS];
 
 static void empty_callback(void *data) { }
 
-int evtchn_alloc_unbound(domid_t dom, domid_t remote_dom)
-{
-	int rc;
-	struct evtchn_alloc_unbound alloc = {
-		.dom = dom,
-		.remote_dom = remote_dom,
-	};
-
-	rc = HYPERVISOR_event_channel_op(EVTCHNOP_alloc_unbound, &alloc);
-	if (rc == 0) {
-		rc = alloc.port;
-	}
-
-	return rc;
-}
-
-int evtchn_bind_interdomain(domid_t remote_dom, evtchn_port_t remote_port)
-{
-	int rc;
-	struct evtchn_bind_interdomain bind = {
-		.remote_dom = remote_dom,
-		.remote_port = remote_port,
-	};
-
-	rc = HYPERVISOR_event_channel_op(EVTCHNOP_bind_interdomain, &bind);
-	if (rc == 0) {
-		rc = bind.local_port;
-	}
-
-	return rc;
-}
-
-int evtchn_status(evtchn_status_t *status)
-{
-	return HYPERVISOR_event_channel_op(EVTCHNOP_status, status);
-}
-
-int evtchn_unmask(evtchn_port_t port)
-{
-	struct evtchn_unmask unmask = {
-		.port = port,
-	};
-
-	return HYPERVISOR_event_channel_op(EVTCHNOP_unmask, &unmask);
-}
-
-int evtchn_close(evtchn_port_t port)
-{
-	struct evtchn_close close = {
-		.port = port,
-	};
-
-	return HYPERVISOR_event_channel_op(EVTCHNOP_close, &close);
-}
-
-int evtchn_reset(domid_t dom)
-{
-	struct evtchn_reset reset = {
-		.dom = dom,
-	};
-
-	return HYPERVISOR_event_channel_op(EVTCHNOP_reset, &reset);
-}
-
-int evtchn_set_priority(evtchn_port_t port, uint32_t priority)
-{
-	struct evtchn_set_priority set = {
-		.port = port,
-		.priority = priority,
-	};
-
-	return HYPERVISOR_event_channel_op(EVTCHNOP_set_priority, &set);
-}
-
 void notify_evtchn(evtchn_port_t port)
 {
 	struct evtchn_send send;
@@ -108,12 +34,14 @@ void notify_evtchn(evtchn_port_t port)
 	HYPERVISOR_event_channel_op(EVTCHNOP_send, &send);
 }
 
-int bind_event_channel(evtchn_port_t port, evtchn_cb_t cb, void *data) {
+int bind_event_channel(evtchn_port_t port, evtchn_cb_t cb, void *data)
+{
 	__ASSERT(port < EVTCHN_2L_NR_CHANNELS,
 		"%s: trying to bind invalid evtchn #%u\n",
 		__func__, port);
-	__ASSERT(NULL != cb, "%s: NULL callback for evtchn #%u\n",
+	__ASSERT(cb != NULL, "%s: NULL callback for evtchn #%u\n",
 		__func__, port);
+
 
 	if (event_channels[port].cb != empty_callback)
 		LOG_WRN("%s: re-bind callback for evtchn #%u\n",
@@ -125,7 +53,8 @@ int bind_event_channel(evtchn_port_t port, evtchn_cb_t cb, void *data) {
 	return 0;
 }
 
-int unbind_event_channel(evtchn_port_t port) {
+int unbind_event_channel(evtchn_port_t port)
+{
 	__ASSERT(port < EVTCHN_2L_NR_CHANNELS,
 		"%s: trying to unbind invalid evtchn #%u\n",
 		__func__, port);
@@ -136,7 +65,8 @@ int unbind_event_channel(evtchn_port_t port) {
 	return 0;
 }
 
-int mask_event_channel(evtchn_port_t port) {
+int mask_event_channel(evtchn_port_t port)
+{
 	shared_info_t *s = HYPERVISOR_shared_info;
 
 	__ASSERT(port < EVTCHN_2L_NR_CHANNELS,
@@ -149,7 +79,8 @@ int mask_event_channel(evtchn_port_t port) {
 	return 0;
 }
 
-int unmask_event_channel(evtchn_port_t port) {
+int unmask_event_channel(evtchn_port_t port)
+{
 	shared_info_t *s = HYPERVISOR_shared_info;
 
 	__ASSERT(port < EVTCHN_2L_NR_CHANNELS,
@@ -161,25 +92,30 @@ int unmask_event_channel(evtchn_port_t port) {
 	return 0;
 }
 
-static void clear_event_channel(evtchn_port_t port) {
+static void clear_event_channel(evtchn_port_t port)
+{
 	shared_info_t *s = HYPERVISOR_shared_info;
+
 	sys_bitfield_clear_bit((mem_addr_t) s->evtchn_pending, port);
 }
 
-static inline xen_ulong_t get_pending_events(xen_ulong_t pos) {
+static inline xen_ulong_t get_pending_events(xen_ulong_t pos)
+{
 	shared_info_t *s = HYPERVISOR_shared_info;
+
 	return (s->evtchn_pending[pos] & ~(s->evtchn_mask[pos]));
 }
 
-static void process_event(evtchn_port_t port) {
+static void process_event(evtchn_port_t port)
+{
 	evtchn_handle_t channel = event_channels[port];
 
 	clear_event_channel(port);
-
 	channel.cb(channel.priv);
 }
 
-static void events_isr(void *data) {
+static void events_isr(void *data)
+{
 	ARG_UNUSED(data);
 
 	/* Needed for 2-level unwrapping */
@@ -221,9 +157,8 @@ static void events_isr(void *data) {
 	}
 }
 
-
-
-int xen_events_init(void) {
+int xen_events_init(void)
+{
 	int i;
 
 	if (!HYPERVISOR_shared_info) {
@@ -238,11 +173,11 @@ int xen_events_init(void) {
 		event_channels[i].priv = NULL;
 	}
 
-	IRQ_CONNECT(DT_IRQ_BY_IDX(DT_INST(0,xen_xen), 0, irq),
-		DT_IRQ_BY_IDX(DT_INST(0,xen_xen), 0, priority), events_isr,
-		NULL, DT_IRQ_BY_IDX(DT_INST(0,xen_xen), 0, flags));
+	IRQ_CONNECT(DT_IRQ_BY_IDX(DT_INST(0, xen_xen), 0, irq),
+		DT_IRQ_BY_IDX(DT_INST(0, xen_xen), 0, priority), events_isr,
+		NULL, DT_IRQ_BY_IDX(DT_INST(0, xen_xen), 0, flags));
 
-	irq_enable(DT_IRQ_BY_IDX(DT_INST(0,xen_xen), 0, irq));
+	irq_enable(DT_IRQ_BY_IDX(DT_INST(0, xen_xen), 0, irq));
 
 	LOG_INF("%s: events inited\n", __func__);
 	return 0;

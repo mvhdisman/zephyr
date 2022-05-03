@@ -1,0 +1,224 @@
+lib/libc/newlib/libc-hooks.c:36:#ifdef CONFIG_MMU
+lib/libc/newlib/libc-hooks.c:106:#ifdef CONFIG_MMU
+lib/libc/newlib/libc-hooks.c:116:#endif /* CONFIG_MMU */
+cmake/modules/extensions.cmake:3652:    if(CONFIG_MMU)
+drivers/ethernet/eth_dwmac.c:57:#ifdef CONFIG_MMU
+drivers/ethernet/eth_dwmac_priv.h:58:#ifdef CONFIG_MMU
+arch/arm/core/aarch32/mmu/arm_mmu.c:740:	__ASSERT(KB(4) == CONFIG_MMU_PAGE_SIZE,
+arch/arm/core/aarch32/mmu/arm_mmu.c:742:		 CONFIG_MMU_PAGE_SIZE);
+arch/x86/gen_mmu.py:919:        page_size = syms["CONFIG_MMU_PAGE_SIZE"]
+arch/x86/core/x86_mmu.c:207:#define PT_AREA		((uintptr_t)(CONFIG_MMU_PAGE_SIZE * NUM_PT_ENTRIES))
+arch/x86/core/x86_mmu.c:266:	((INITIAL_PTABLE_PAGES * CONFIG_MMU_PAGE_SIZE) + 0x20)
+arch/x86/core/x86_mmu.c:269:	(INITIAL_PTABLE_PAGES * CONFIG_MMU_PAGE_SIZE)
+arch/x86/core/x86_mmu.c:451:	__ASSERT((addr & (CONFIG_MMU_PAGE_SIZE - 1)) == 0U,
+arch/x86/core/x86_mmu.c:459:	if ((addr & (CONFIG_MMU_PAGE_SIZE - 1)) == 0U) {
+arch/x86/core/x86_mmu.c:482:	__ASSERT((size & (CONFIG_MMU_PAGE_SIZE - 1)) == 0U,
+arch/x86/core/x86_mmu.c:490:	if ((size & (CONFIG_MMU_PAGE_SIZE - 1)) == 0U) {
+arch/x86/core/x86_mmu.c:1111:	for (size_t offset = 0; offset < size; offset += CONFIG_MMU_PAGE_SIZE) {
+arch/x86/core/x86_mmu.c:1372:	ret = range_map_unlocked(stack, 0, CONFIG_MMU_PAGE_SIZE,
+arch/x86/core/x86_mmu.c:1437:			   (uintptr_t)addr, size, CONFIG_MMU_PAGE_SIZE);
+arch/x86/core/x86_mmu.c:1440:	     offset += CONFIG_MMU_PAGE_SIZE) {
+arch/x86/core/x86_mmu.c:1620:#define PTABLE_COPY_SIZE	(INITIAL_PTABLE_PAGES * CONFIG_MMU_PAGE_SIZE)
+arch/x86/core/x86_mmu.c:1624:	__aligned(CONFIG_MMU_PAGE_SIZE);
+arch/x86/core/x86_mmu.c:1640:		page_pos -= CONFIG_MMU_PAGE_SIZE;
+arch/x86/core/x86_mmu.c:1645:		memset(ret, 0, CONFIG_MMU_PAGE_SIZE);
+arch/x86/core/x86_mmu.c:1655:	return (page_pos - page_pool) / CONFIG_MMU_PAGE_SIZE;
+arch/x86/core/x86_mmu.c:1996:	uintptr_t pos = ROUND_DOWN(addr, CONFIG_MMU_PAGE_SIZE);
+arch/x86/core/x86_mmu.c:1997:	uintptr_t end = ROUND_UP(addr + len, CONFIG_MMU_PAGE_SIZE);
+arch/x86/core/x86_mmu.c:1999:	for (; pos < end; pos += CONFIG_MMU_PAGE_SIZE) {
+arch/x86/core/x86_mmu.c:2059:	__ASSERT(POINTER_TO_UINT(virt) % CONFIG_MMU_PAGE_SIZE == 0U,
+arch/x86/core/x86_mmu.c:2089:	ret = range_map(addr, location, CONFIG_MMU_PAGE_SIZE, MMU_A, mask,
+arch/x86/core/x86_mmu.c:2101:	ret = range_map(addr, phys, CONFIG_MMU_PAGE_SIZE, MMU_P, mask,
+arch/x86/core/fatal.c:83:		start = _current->stack_info.start - CONFIG_MMU_PAGE_SIZE;
+arch/x86/core/userspace.c:134:	stack_start += CONFIG_MMU_PAGE_SIZE;
+arch/x86/core/userspace.c:135:	stack_size -= CONFIG_MMU_PAGE_SIZE;
+arch/x86/core/userspace.c:140:				 CONFIG_MMU_PAGE_SIZE);
+arch/x86/core/prep_c.c:31:#ifdef CONFIG_MMU
+arch/x86/CMakeLists.txt:35:if (CONFIG_MMU)
+arch/x86/Kconfig:378:	  extra pages (of size CONFIG_MMU_PAGE_SIZE) to the page table
+arch/arm64/core/header.S:11:#if CONFIG_MMU_PAGE_SIZE == 4096 || defined(CONFIG_ARM_MPU)
+arch/arm64/core/header.S:13:#elif CONFIG_MMU_PAGE_SIZE == 16384
+arch/arm64/core/header.S:15:#elif CONFIG_MMU_PAGE_SIZE == 65536
+arch/arm64/core/mmu.c:599:	__ASSERT(((virt | phys | size) & (CONFIG_MMU_PAGE_SIZE - 1)) == 0,
+arch/arm64/core/mmu.c:624:	__ASSERT(((virt | size) & (CONFIG_MMU_PAGE_SIZE - 1)) == 0,
+arch/arm64/core/mmu.c:818:	__ASSERT(CONFIG_MMU_PAGE_SIZE == KB(4),
+arch/arm64/core/mmu.c:968:	size_t alignment = CONFIG_MMU_PAGE_SIZE;
+arch/common/nocache.ld:13:#if defined(CONFIG_MMU)
+arch/common/nocache.ld:21:#if defined(CONFIG_MMU)
+tests/drivers/syscon/prj.conf:6:CONFIG_MMU=y
+tests/arch/x86/pagetables/testcase.yaml:5:    filter: CONFIG_MMU
+tests/arch/x86/pagetables/src/main.c:90:	     pos += CONFIG_MMU_PAGE_SIZE) {
+tests/arch/x86/pagetables/src/main.c:152:	     pos += CONFIG_MMU_PAGE_SIZE) {
+tests/arch/x86/pagetables/src/main.c:186:	     pos += CONFIG_MMU_PAGE_SIZE) {
+tests/kernel/fatal/exception/src/main.c:453:			   obj_size, CONFIG_MMU_PAGE_SIZE);
+tests/kernel/fatal/exception/src/main.c:466:			   CONFIG_MMU_PAGE_SIZE);
+tests/kernel/fatal/exception/src/main.c:473:			   CONFIG_MMU_PAGE_SIZE);
+tests/kernel/mem_protect/mem_map/custom-sections.ld:3:SECTION_DATA_PROLOGUE(TEST_MEM_MAP,,SUBALIGN(CONFIG_MMU_PAGE_SIZE))
+tests/kernel/mem_protect/mem_map/testcase.yaml:4:    filter: CONFIG_MMU and not CONFIG_X86_64
+tests/kernel/mem_protect/mem_map/testcase.yaml:9:    filter: CONFIG_MMU and CONFIG_X86_64 and not CONFIG_COVERAGE
+tests/kernel/mem_protect/mem_map/testcase.yaml:13:    filter: CONFIG_MMU and CONFIG_X86_64 and CONFIG_COVERAGE
+tests/kernel/mem_protect/mem_map/testcase.yaml:18:    filter: CONFIG_MMU and CONFIG_X86_64 and CONFIG_COVERAGE
+tests/kernel/mem_protect/mem_map/src/main.c:22:static uint8_t __aligned(CONFIG_MMU_PAGE_SIZE)
+tests/kernel/mem_protect/mem_map/src/main.c:23:			test_page[2 * CONFIG_MMU_PAGE_SIZE];
+tests/kernel/mem_protect/mem_map/src/main.c:217:		mapped = k_mem_map(CONFIG_MMU_PAGE_SIZE, K_MEM_PERM_RW);
+tests/kernel/mem_protect/mem_map/src/main.c:228:		for (i = 0; i < CONFIG_MMU_PAGE_SIZE; i++) {
+tests/kernel/mem_protect/mem_map/src/main.c:234:		zassert_equal(free_mem, free_mem_after_map + CONFIG_MMU_PAGE_SIZE,
+tests/kernel/mem_protect/mem_map/src/main.c:238:		(void)memset(mapped, '\xFF', CONFIG_MMU_PAGE_SIZE);
+tests/kernel/mem_protect/mem_map/src/main.c:239:		for (i = 0; i < CONFIG_MMU_PAGE_SIZE; i++) {
+tests/kernel/mem_protect/mem_map/src/main.c:245:		k_mem_unmap(mapped, CONFIG_MMU_PAGE_SIZE);
+tests/kernel/mem_protect/mem_map/src/main.c:271:	mapped = k_mem_map(CONFIG_MMU_PAGE_SIZE, K_MEM_PERM_RW);
+tests/kernel/mem_protect/mem_map/src/main.c:274:		mapped + CONFIG_MMU_PAGE_SIZE);
+tests/kernel/mem_protect/mem_map/src/main.c:299:	mapped = k_mem_map(CONFIG_MMU_PAGE_SIZE, K_MEM_PERM_RW);
+tests/kernel/mem_protect/mem_map/src/main.c:302:		mapped + CONFIG_MMU_PAGE_SIZE);
+tests/kernel/mem_protect/mem_map/src/main.c:309:	mapped += CONFIG_MMU_PAGE_SIZE + sizeof(void *);
+tests/kernel/mem_protect/mem_map/src/main.c:336:	expected_cnt = free_mem / CONFIG_MMU_PAGE_SIZE;
+tests/kernel/mem_protect/mem_map/src/main.c:351:	addr = k_mem_map(CONFIG_MMU_PAGE_SIZE, K_MEM_PERM_RW);
+tests/kernel/mem_protect/mem_map/src/main.c:353:	k_mem_unmap(addr, CONFIG_MMU_PAGE_SIZE);
+tests/kernel/mem_protect/mem_map/src/main.c:355:	cnt = POINTER_TO_UINT(addr) + CONFIG_MMU_PAGE_SIZE * 2;
+tests/kernel/mem_protect/mem_map/src/main.c:357:	cnt /= CONFIG_MMU_PAGE_SIZE * 3;
+tests/kernel/mem_protect/mem_map/src/main.c:365:	free_mem_expected = free_mem - (expected_cnt * CONFIG_MMU_PAGE_SIZE);
+tests/kernel/mem_protect/mem_map/src/main.c:368:		addr = k_mem_map(CONFIG_MMU_PAGE_SIZE, K_MEM_PERM_RW);
+tests/kernel/mem_protect/mem_map/src/main.c:392:		k_mem_unmap(addr, CONFIG_MMU_PAGE_SIZE);
+tests/kernel/mem_protect/userspace/src/main.c:469:#ifndef CONFIG_MMU
+tests/kernel/mem_protect/userspace/src/main.c:533:#endif /* CONFIG_MMU */
+tests/kernel/mem_protect/syscalls/src/main.c:23:#elif CONFIG_MMU
+tests/kernel/mem_protect/demand_paging/src/main.c:83:#define HALF_BYTES	(HALF_PAGES * CONFIG_MMU_PAGE_SIZE)
+tests/kernel/mem_protect/demand_paging/src/main.c:299:		       CONFIG_MMU_PAGE_SIZE);
+tests/kernel/mem_protect/demand_paging/src/main.c:306:	ret = k_mem_map(CONFIG_MMU_PAGE_SIZE, K_MEM_PERM_RW);
+tests/subsys/ipc/ipc_service/prj.conf:5:CONFIG_MMU=y
+include/arch/arm/aarch32/cortex_a_r/scripts/linker.ld:62:_region_min_align = CONFIG_MMU_PAGE_SIZE;
+include/arch/x86/thread_stack.h:18:#define Z_X86_STACK_BASE_ALIGN	CONFIG_MMU_PAGE_SIZE
+include/arch/x86/thread_stack.h:28:#define Z_X86_STACK_SIZE_ALIGN	CONFIG_MMU_PAGE_SIZE
+include/arch/x86/thread_stack.h:66:	char guard_page[CONFIG_MMU_PAGE_SIZE];
+include/arch/x86/thread_stack.h:69:	char privilege_stack[CONFIG_MMU_PAGE_SIZE];
+include/arch/x86/thread_stack.h:82:#define ARCH_KERNEL_STACK_RESERVED	CONFIG_MMU_PAGE_SIZE
+include/arch/x86/thread_stack.h:83:#define ARCH_KERNEL_STACK_OBJ_ALIGN	CONFIG_MMU_PAGE_SIZE
+include/arch/x86/ia32/linker.ld:55:#ifdef CONFIG_MMU
+include/arch/x86/ia32/linker.ld:56:	#define MMU_PAGE_ALIGN		. = ALIGN(CONFIG_MMU_PAGE_SIZE);
+include/arch/x86/pagetables.ld:11:#ifdef CONFIG_MMU
+include/arch/x86/pagetables.ld:39:#endif /* CONFIG_MMU */
+include/arch/x86/intel64/linker.ld:12:#define MMU_PAGE_ALIGN		. = ALIGN(CONFIG_MMU_PAGE_SIZE);
+include/arch/x86/intel64/linker.ld:76:	. = ALIGN(CONFIG_MMU_PAGE_SIZE);
+include/arch/x86/memory.ld:20: * If CONFIG_MMU is enabled, then the ROM region in MEMORY is used to set the
+include/arch/x86/memory.ld:37:/* Virtual base address for the kernel; with CONFIG_MMU this is not necessarily
+include/arch/arm64/scripts/linker.ld:45:  _region_min_align = CONFIG_MMU_PAGE_SIZE;
+include/arch/arm64/mm.h:13: * page size which is CONFIG_MMU_PAGE_SIZE
+include/arch/arm64/mm.h:15:#define MEM_DOMAIN_ALIGN_AND_SIZE CONFIG_MMU_PAGE_SIZE
+include/sys/mem_manage.h:68:#ifdef CONFIG_MMU
+include/sys/mem_manage.h:136:#ifdef CONFIG_MMU
+include/sys/mem_manage.h:148:#endif /* CONFIG_MMU */
+include/sys/mem_manage.h:200: * This API is only available if CONFIG_MMU is enabled.
+include/sys/mem_manage.h:234: * This API is only available if CONFIG_MMU is enabled.
+include/sys/device_mmio.h:36:#if defined(CONFIG_MMU) || defined(CONFIG_PCIE)
+include/sys/device_mmio.h:89:#ifdef CONFIG_MMU
+include/sys/device_mmio.h:100:#endif /* CONFIG_MMU */
+include/linker/linker-defs.h:220:#ifdef CONFIG_MMU
+include/linker/linker-defs.h:224:#endif /* CONFIG_MMU */
+include/linker/linker-tool-gcc.h:81: * This macro is intentionally undefined for CONFIG_MMU systems when
+include/linker/linker-tool-gcc.h:105: * If CONFIG_MMU is active, the vregion argument will be used to
+include/linker/linker-tool-gcc.h:109: * @param vregion Output VMA (only used if CONFIG_MMU where LMA != VMA)
+include/linker/linker-tool-gcc.h:129: * @param lregion Output LMA (only used if CONFIG_MMU if VMA != LMA,
+include/linker/linker-tool-gcc.h:147: * @param lregion Output LMA (only used if CONFIG_MMU if VMA != LMA,
+doc/hardware/porting/arch.rst:474:their I/O regions, :kconfig:option:`CONFIG_MMU` needs to be enabled and the
+doc/zephyr.doxyfile.in:2273:                         CONFIG_MMU \
+doc/releases/release-notes-2.4.rst:179:    ``CONFIG_MMU``.
+doc/releases/release-notes-2.4.rst:261:  * x86 MMU paging support has been overhauled to meet CONFIG_MMU requirements.
+kernel/init.c:203:#ifdef CONFIG_MMU
+kernel/init.c:210:#endif /* CONFIG_MMU */
+kernel/init.c:240:#ifdef CONFIG_MMU
+kernel/init.c:242:#endif /* CONFIG_MMU */
+kernel/include/mmu.h:9:#ifdef CONFIG_MMU
+kernel/include/mmu.h:31:#define Z_NUM_PAGE_FRAMES	(Z_PHYS_RAM_SIZE / (size_t)CONFIG_MMU_PAGE_SIZE)
+kernel/include/mmu.h:160:	__ASSERT(phys % CONFIG_MMU_PAGE_SIZE == 0U,
+kernel/include/mmu.h:169:	return (uintptr_t)((pf - z_page_frames) * CONFIG_MMU_PAGE_SIZE) +
+kernel/include/mmu.h:191:			      CONFIG_MMU_PAGE_SIZE];
+kernel/include/mmu.h:196:	__ASSERT((uintptr_t)addr % CONFIG_MMU_PAGE_SIZE == 0U,
+kernel/include/mmu.h:198:	__ASSERT(size % CONFIG_MMU_PAGE_SIZE == 0U,
+kernel/include/mmu.h:218:	     _phys += CONFIG_MMU_PAGE_SIZE, _pageframe++)
+kernel/include/mmu.h:224:#define Z_VM_RESERVED	CONFIG_MMU_PAGE_SIZE
+kernel/include/mmu.h:227:				     CONFIG_MMU_PAGE_SIZE))
+kernel/include/mmu.h:295:#endif /* CONFIG_MMU */
+kernel/include/kernel_arch_interface.h:253: * are assumed to be aligned to CONFIG_MMU_PAGE_SIZE.
+kernel/include/kernel_arch_interface.h:296: * are assumed to be aligned to CONFIG_MMU_PAGE_SIZE.
+kernel/mmu.c:128:	     _pos < ((uint8_t *)_base + _size); _pos += CONFIG_MMU_PAGE_SIZE)
+kernel/mmu.c:132:	     _pos < ((uintptr_t)_base + _size); _pos += CONFIG_MMU_PAGE_SIZE)
+kernel/mmu.c:185:			   CONFIG_KERNEL_VM_SIZE / CONFIG_MMU_PAGE_SIZE);
+kernel/mmu.c:195:	       - (offset * CONFIG_MMU_PAGE_SIZE) - size;
+kernel/mmu.c:201:		- POINTER_TO_UINT(vaddr) - size) / CONFIG_MMU_PAGE_SIZE;
+kernel/mmu.c:215:		num_bits = Z_VM_RESERVED / CONFIG_MMU_PAGE_SIZE;
+kernel/mmu.c:224:	num_bits /= CONFIG_MMU_PAGE_SIZE;
+kernel/mmu.c:249:	num_bits = size / CONFIG_MMU_PAGE_SIZE;
+kernel/mmu.c:266:	num_bits = (size + align - CONFIG_MMU_PAGE_SIZE) / CONFIG_MMU_PAGE_SIZE;
+kernel/mmu.c:267:	alloc_size = num_bits * CONFIG_MMU_PAGE_SIZE;
+kernel/mmu.c:507:	arch_mem_map(addr, phys, CONFIG_MMU_PAGE_SIZE, flags | K_MEM_CACHE_WB);
+kernel/mmu.c:520:		memset(addr, 0, CONFIG_MMU_PAGE_SIZE);
+kernel/mmu.c:537:	__ASSERT(size % CONFIG_MMU_PAGE_SIZE == 0U,
+kernel/mmu.c:549:	total_size = size + CONFIG_MMU_PAGE_SIZE * 2;
+kernel/mmu.c:551:	dst = virt_region_alloc(total_size, CONFIG_MMU_PAGE_SIZE);
+kernel/mmu.c:560:	arch_mem_unmap(dst, CONFIG_MMU_PAGE_SIZE);
+kernel/mmu.c:561:	arch_mem_unmap(dst + CONFIG_MMU_PAGE_SIZE + size,
+kernel/mmu.c:562:		       CONFIG_MMU_PAGE_SIZE);
+kernel/mmu.c:565:	dst += CONFIG_MMU_PAGE_SIZE;
+kernel/mmu.c:594:	__ASSERT_NO_MSG(POINTER_TO_UINT(addr) >= CONFIG_MMU_PAGE_SIZE);
+kernel/mmu.c:599:	pos = (uint8_t *)addr - CONFIG_MMU_PAGE_SIZE;
+kernel/mmu.c:600:	z_mem_assert_virtual_region(pos, size + (CONFIG_MMU_PAGE_SIZE * 2));
+kernel/mmu.c:609:	ret = arch_page_phys_get(pos - CONFIG_MMU_PAGE_SIZE, NULL);
+kernel/mmu.c:658:		arch_mem_unmap(pos, CONFIG_MMU_PAGE_SIZE);
+kernel/mmu.c:667:	pos = (uint8_t *)addr - CONFIG_MMU_PAGE_SIZE;
+kernel/mmu.c:668:	total_size = size + CONFIG_MMU_PAGE_SIZE * 2;
+kernel/mmu.c:694:	return ret * (size_t)CONFIG_MMU_PAGE_SIZE;
+kernel/mmu.c:709:	return CONFIG_MMU_PAGE_SIZE;
+kernel/mmu.c:727:					 CONFIG_MMU_PAGE_SIZE);
+kernel/mmu.c:777:					 CONFIG_MMU_PAGE_SIZE);
+kernel/mmu.c:820:					    CONFIG_MMU_PAGE_SIZE);
+kernel/mmu.c:822:					CONFIG_MMU_PAGE_SIZE);
+kernel/mmu.c:1020:	for (size_t offset = 0; offset < size; offset += CONFIG_MMU_PAGE_SIZE) {
+kernel/mmu.c:1154:	for (size_t offset = 0; offset < size; offset += CONFIG_MMU_PAGE_SIZE) {
+kernel/mmu.c:1430:				   & ~(CONFIG_MMU_PAGE_SIZE - 1));
+kernel/CMakeLists.txt:81:target_sources_ifdef(CONFIG_MMU                   kernel PRIVATE mmu.c)
+subsys/shell/modules/devmem_service.c:200:#if defined(CONFIG_MMU) || defined(CONFIG_PCIE)
+subsys/shell/modules/devmem_service.c:206:#endif /* defined(CONFIG_MMU) || defined(CONFIG_PCIE) */
+subsys/demand_paging/backing_store/backing_store_qemu_x86_tiny.c:37:			       - CONFIG_MMU_PAGE_SIZE));
+subsys/demand_paging/backing_store/backing_store_qemu_x86_tiny.c:60:		     CONFIG_MMU_PAGE_SIZE);
+subsys/demand_paging/backing_store/backing_store_qemu_x86_tiny.c:66:		     CONFIG_MMU_PAGE_SIZE);
+subsys/demand_paging/backing_store/ram.c:53:static char backing_store[CONFIG_MMU_PAGE_SIZE *
+subsys/demand_paging/backing_store/ram.c:60:	__ASSERT(location % CONFIG_MMU_PAGE_SIZE == 0,
+subsys/demand_paging/backing_store/ram.c:63:		 (CONFIG_BACKING_STORE_RAM_PAGES * CONFIG_MMU_PAGE_SIZE),
+subsys/demand_paging/backing_store/ram.c:78:	__ASSERT(offset % CONFIG_MMU_PAGE_SIZE == 0,
+subsys/demand_paging/backing_store/ram.c:115:		     CONFIG_MMU_PAGE_SIZE);
+subsys/demand_paging/backing_store/ram.c:121:		     CONFIG_MMU_PAGE_SIZE);
+subsys/demand_paging/backing_store/ram.c:132:	k_mem_slab_init(&backing_slabs, backing_store, CONFIG_MMU_PAGE_SIZE,
+Binary file build/zephyr/zephyr_pre1.elf matches
+build/zephyr/misc/generated/configs.c:66:GEN_ABSOLUTE_SYM_KCONFIG(CONFIG_MMU_PAGE_SIZE, 0x1000);
+build/zephyr/misc/generated/configs.c:138:GEN_ABSOLUTE_SYM_KCONFIG(CONFIG_MMU, 1);
+build/zephyr/include/generated/autoconf.h:56:#define CONFIG_MMU_PAGE_SIZE 0x1000
+build/zephyr/include/generated/autoconf.h:128:#define CONFIG_MMU 1
+Binary file build/zephyr/zephyr.elf matches
+build/zephyr/zephyr.lst:6570:	__ASSERT(((virt | phys | size) & (CONFIG_MMU_PAGE_SIZE - 1)) == 0,
+build/zephyr/zephyr.lst:6817:	size_t alignment = CONFIG_MMU_PAGE_SIZE;
+build/zephyr/zephyr.lst:7683:#ifdef CONFIG_MMU
+build/zephyr/zephyr.lst:8221:#endif /* CONFIG_MMU */
+build/zephyr/zephyr.lst:8250:#ifdef CONFIG_MMU
+build/zephyr/zephyr.lst:8253:#endif /* CONFIG_MMU */
+build/zephyr/zephyr.lst:10848:		- POINTER_TO_UINT(vaddr) - size) / CONFIG_MMU_PAGE_SIZE;
+build/zephyr/zephyr.lst:10852:		- POINTER_TO_UINT(vaddr) - size) / CONFIG_MMU_PAGE_SIZE;
+build/zephyr/zephyr.lst:10877:		- POINTER_TO_UINT(vaddr) - size) / CONFIG_MMU_PAGE_SIZE;
+build/zephyr/zephyr.lst:10883:	num_bits = size / CONFIG_MMU_PAGE_SIZE;
+build/zephyr/zephyr.lst:10888:		- POINTER_TO_UINT(vaddr) - size) / CONFIG_MMU_PAGE_SIZE;
+build/zephyr/zephyr.lst:10893:		- POINTER_TO_UINT(vaddr) - size) / CONFIG_MMU_PAGE_SIZE;
+build/zephyr/zephyr.lst:10969:		- POINTER_TO_UINT(vaddr) - size) / CONFIG_MMU_PAGE_SIZE;
+build/zephyr/zephyr.lst:10976:		- POINTER_TO_UINT(vaddr) - size) / CONFIG_MMU_PAGE_SIZE;
+build/zephyr/zephyr.lst:10986:	num_bits = (size + align - CONFIG_MMU_PAGE_SIZE) / CONFIG_MMU_PAGE_SIZE;
+build/zephyr/zephyr.lst:10990:	num_bits = (size + align - CONFIG_MMU_PAGE_SIZE) / CONFIG_MMU_PAGE_SIZE;
+build/zephyr/zephyr.lst:10994:	alloc_size = num_bits * CONFIG_MMU_PAGE_SIZE;
+build/zephyr/zephyr.lst:11015:	       - (offset * CONFIG_MMU_PAGE_SIZE) - size;
+build/zephyr/zephyr.lst:11021:	       - (offset * CONFIG_MMU_PAGE_SIZE) - size;
+Binary file build/zephyr/libzephyr.a matches
+Binary file build/zephyr/zephyr_pre0.elf matches
+build/zephyr/.config:227:CONFIG_MMU_PAGE_SIZE=0x1000
+build/zephyr/.config:415:CONFIG_MMU=y
+Binary file build/zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj matches
+boards/x86/qemu_x86/qemu_x86_tiny.ld:24:/* Virtual base address for the kernel; with CONFIG_MMU this is not necessarily
+boards/x86/qemu_x86/qemu_x86_tiny.ld:86:#ifdef CONFIG_MMU
+boards/x86/qemu_x86/qemu_x86_tiny.ld:87:	#define MMU_PAGE_ALIGN		. = ALIGN(CONFIG_MMU_PAGE_SIZE);
+boards/arm64/xenvm/xenvm_gicv3_defconfig:31:CONFIG_MMU=y

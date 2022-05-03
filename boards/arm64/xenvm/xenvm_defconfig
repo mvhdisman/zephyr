@@ -16,3 +16,6 @@ CONFIG_UART_XEN_HVC=y
 # Enable logging subsys
 CONFIG_LOG=y
 CONFIG_LOG_MODE_MINIMAL=y
+
+# added by Gustaf: k_malloc err in xs.c
+CONFIG_HEAP_MEM_POOL_SIZE=256

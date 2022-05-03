@@ -8,7 +8,7 @@
 
 #include <zephyr.h>
 #include <sys/printk.h>
-
+#include <xen/gnttab.h>
 /*
  * The hello world demo has two threads that utilize semaphores and sleeping
  * to take turns printing a greeting message at a controlled rate. The demo

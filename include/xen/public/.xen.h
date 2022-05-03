@@ -47,7 +47,6 @@ __DEFINE_XEN_GUEST_HANDLE(ulong, unsigned long);
 #endif
 DEFINE_XEN_GUEST_HANDLE(void);
 
-DEFINE_XEN_GUEST_HANDLE(uint8_t);
 DEFINE_XEN_GUEST_HANDLE(uint64_t);
 DEFINE_XEN_GUEST_HANDLE(xen_pfn_t);
 DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
@@ -318,7 +317,7 @@ struct shared_info {
 	 * are delivered by this mechanism:
 	 *  1. Bi-directional inter- and intra-domain connections. Domains must
 	 *     arrange out-of-band to set up a connection (usually by allocating
-	 *     an unbound 'listener' port and avertising that via a storage service
+	 *     an unbound 'listener' port and advertising that via a storage service
 	 *     such as xenstore).
 	 *  2. Physical interrupts. A domain with suitable hardware-access
 	 *     privileges can bind an event-channel port to a physical interrupt
@@ -370,26 +369,6 @@ struct shared_info {
 };
 #ifndef __XEN__
 typedef struct shared_info shared_info_t;
-#endif
-
-typedef uint8_t xen_domain_handle_t[16];
-
-#ifndef int64_aligned_t
-#define int64_aligned_t int64_t
-#endif
-#ifndef uint64_aligned_t
-#define uint64_aligned_t uint64_t
-#endif
-#ifndef XEN_GUEST_HANDLE_64
-#define XEN_GUEST_HANDLE_64(name) XEN_GUEST_HANDLE(name)
-#endif
-
-#ifndef __ASSEMBLY__
-struct xenctl_bitmap {
-    XEN_GUEST_HANDLE_64(uint8_t) bitmap;
-    uint32_t nr_bits;
-};
-typedef struct xenctl_bitmap xenctl_bitmap_t;
 #endif
 
 #endif /* !__ASSEMBLY__ */

@@ -6,3 +6,5 @@ config XENVM_USE_GIC_V3
 	depends on BOARD_XENVM
 	help
 	  Configure Xen VM to use GICv3 instead of default GICv2.
+
+select CONFIG_ARCH_HAS_THREAD_LOCAL_STORAGE

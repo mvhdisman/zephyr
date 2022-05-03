@@ -25,13 +25,13 @@ LOG_MODULE_REGISTER(xen_enlighten);
  * which will be casted to 'struct shared_info'. It is needed to initialize Xen
  * event channels as soon as possible after start.
  */
-static uint8_t shared_info_buf[XEN_PAGE_SIZE]
-			__attribute__((aligned(XEN_PAGE_SIZE)));
+static uint8_t shared_info_buf[XEN_PAGE_SIZE] __aligned(XEN_PAGE_SIZE);
 
 /* Remains NULL until mapping will be finished by Xen */
-shared_info_t *HYPERVISOR_shared_info = NULL;
+shared_info_t *HYPERVISOR_shared_info;
 
-static int xen_map_shared_info (const shared_info_t *shared_page) {
+static int xen_map_shared_info(const shared_info_t *shared_page)
+{
 	struct xen_add_to_physmap xatp;
 
 	xatp.domid = DOMID_SELF;
@@ -42,7 +42,8 @@ static int xen_map_shared_info (const shared_info_t *shared_page) {
 	return HYPERVISOR_memory_op(XENMEM_add_to_physmap, &xatp);
 }
 
-static int xen_enlighten_init(const struct device *dev) {
+static int xen_enlighten_init(const struct device *dev)
+{
 	ARG_UNUSED(dev);
 	int ret = 0;
 	shared_info_t *info = (shared_info_t *) shared_info_buf;
